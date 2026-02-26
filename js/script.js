@@ -104,12 +104,26 @@ const AvailableJob = document.getElementById('AvailableJob');
 const TotalJob = document.getElementById('TotalJob');
 const interviewCount = document.getElementById("interviewCount");
 const rejectedCount = document.getElementById("rejectedCount");
+const allbtn = document.getElementById('allBtn')
+const interviewbtn = document.getElementById('interviewBtn')
+const rejectbtn = document.getElementById('rejectBtn')
+
+
 
 
 
 function loadAllData(){
-    cardContainer.innerHTML="";
+    cardContainer.innerHTML = "";
+    allbtn.classList.add("btn-success");
+     interviewbtn.classList.remove("btn-success")
+     rejectbtn.classList.remove("btn-success");
+    if(jobs.length == 0){
+      cardContainer.innerHTML = "no data Found";
+      TotalJob.innerText = jobs.length;
+      return;
+    }
     for(jobchild of jobs){
+     
         let createElement = document.createElement('div')
         createElement.innerHTML = `
          <div class="cardChild p-4 bg-white mb-5">
@@ -122,7 +136,7 @@ function loadAllData(){
                         </div>
                     </div>
                     <p class="text-gray-500"><span>${jobchild.locationType}</span> • <span>${jobchild.employmentType}</span> • <span>${jobchild.salaryMin}</span> - <span>${jobchild.salaryMax}</span></p>
-                    <button id="${jobchild.id}" class="stutus btn btn-active  p-2 rounded mt-6 mb-4">${jobchild.status}</button>
+                    <button id="stutus" class="stutus btn btn-active  p-2 rounded mt-6 mb-4">${jobchild.status}</button>
                     <p>${jobchild.description}</p>
                     <div class="mt-3">
                         <button class="btn btn-outline btn-success" onclick="addInterview('${jobchild.id}')">interview</button>
@@ -133,12 +147,16 @@ function loadAllData(){
                 </div>
         `
         cardContainer.appendChild(createElement)
+      
     }
-    const AlljobDataLen = jobs.length;
-    AvailableJob.innerText = AlljobDataLen;
+
+    
     interviewCount.innerText = interviewJobs.length;
     rejectedCount.innerText = rejectedJobs.length;
-    countDashboard()
+    TotalJob.innerText = jobs.length;
+    AvailableJob.innerText = jobs.length;
+    // countDashboard()
+    
 }
 
 function addInterview(idx){
@@ -146,19 +164,20 @@ function addInterview(idx){
      const filtered = jobs.filter(job => job.id === idx);
      const filterReject = rejectedJobs.filter(job => job.id !== idx);
         
-
+      const find = jobs.find(job => job.id === idx);
+      if(find){
+        find.status = "Interview";
+        
+        
+      }
         
       if(filterReject){
        rejectedJobs = filterReject;
-       console.log(filterReject);
-       
-      
-     }
+      }
 
        const stutusElement =  document.getElementById(idx)
-       stutusElement.innerText ="Interview";
-       stutusElement.classList.remove("btn-secondary")
-       stutusElement.classList.add("btn-success")
+      //  stutusElement.innerText ="Interview";
+       
 
 
      
@@ -169,20 +188,26 @@ function addInterview(idx){
     
     interviewCount.innerText = interviewJobs.length;
     rejectedCount.innerText = rejectedJobs.length;
+    loadAllData();
 }
 function rejectedJobsAdd(idx){
     
     
       const filtered = jobs.filter(job => job.id === idx);
+      const find = jobs.find(job => job.id === idx);
+      if(find){
+        find.status = "Rejected";
+        loadAllData();
+        
+      }
       const filterinterView = interviewJobs.filter(job => job.id !== idx);
   if(filterinterView){
        interviewJobs = filterinterView;   
      }
        
        const stutusElement =  document.getElementById(idx)
-       stutusElement.innerText ="Rejected";
-       stutusElement.classList.remove("btn-success")
-       stutusElement.classList.add("btn-secondary")
+
+      
        let checkDublicate = rejectedJobs.some(job => job.id === idx)
        if(checkDublicate === false){
         rejectedJobs.push(...filtered);
@@ -205,7 +230,6 @@ function removeData(idx){
   loadAllData()
   interviewCount.innerText = interviewJobs.length;
   rejectedCount.innerText = rejectedJobs.length;
-  
 
 }
 function countDashboard(){
@@ -216,6 +240,15 @@ function countDashboard(){
 
 function loadInterview(){
     cardContainer.innerHTML="";
+    interviewbtn.classList.add("btn-success")
+    allbtn.classList.remove("btn-success");
+    rejectbtn.classList.remove("btn-success");
+    if(interviewJobs.length == 0){
+      cardContainer.innerHTML = "no data Found";
+      interviewCount.innerText = interviewJobs.length;
+      AvailableJob.innerText = interviewJobs.length;
+      return;
+    }
     AvailableJob.innerText = interviewJobs.length;
        for(jobchild of interviewJobs){
         let createElement = document.createElement('div')
@@ -246,6 +279,21 @@ function loadInterview(){
 }
 function loadRejectedJobs(){
     cardContainer.innerHTML="";
+    allbtn.classList.remove("btn-success")
+    // allbtn.classList.remove("btn-active")
+    // interviewbtn.classList.remove("btn-active")
+    interviewbtn.classList.remove("btn-success")
+    // rejectbtn.classList.add("btn-active")
+    rejectbtn.classList.add("btn-success")
+    console.log(allbtn.classList);
+    
+    
+    if(rejectedJobs.length == 0){
+      cardContainer.innerHTML = "no data Found";
+      rejectedCount.innerText = rejectedJobs.length;
+      AvailableJob.innerText = rejectedJobs.length;
+      return;
+    }
     AvailableJob.innerText = rejectedJobs.length;
        for(jobchild of rejectedJobs){
         let createElement = document.createElement('div')
