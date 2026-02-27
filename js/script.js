@@ -107,7 +107,8 @@ const rejectedCount = document.getElementById("rejectedCount");
 const allbtn = document.getElementById('allBtn');
 const interviewbtn = document.getElementById('interviewBtn');
 const rejectbtn = document.getElementById('rejectBtn');
-const stutus = document.querySelector('.stutus');
+const stutus = document.getElementsByClassName('stutus');
+
 
 
 function loadAllData(){
@@ -116,10 +117,10 @@ function loadAllData(){
      interviewbtn.classList.remove("btn-success")
      rejectbtn.classList.remove("btn-success");
     if(jobs.length == 0){
-      cardContainer.innerHTML = `<div class="p-32 flex flex-col justify-center items-center bg-white rounded-lg shadow">
+      cardContainer.innerHTML = `<div class="p-4 md:p-32 flex flex-col text-center justify-center items-center bg-white rounded-lg shadow">
                 <img src="jobs.png" alt="">
                 <h1 class="text-2xl font-bold">No jobs available</h1>
-                <p class="text-lg text-[#64748B]">Check back soon for new job opportunities</p>
+                <p class="text-sm md:text-lg text-[#64748B]">Check back soon for new job opportunities</p>
              </div>`;
       TotalJob.innerText = jobs.length;
       return;
@@ -364,10 +365,10 @@ function loadInterview(){
     allbtn.classList.remove("btn-success");
     rejectbtn.classList.remove("btn-success");
     if(interviewJobs.length == 0){
-      cardContainer.innerHTML = `<div class="p-32 flex flex-col justify-center items-center bg-white rounded-lg shadow">
+       cardContainer.innerHTML = `<div class="p-4 md:p-32 flex flex-col text-center justify-center items-center bg-white rounded-lg shadow">
                 <img src="jobs.png" alt="">
                 <h1 class="text-2xl font-bold">No jobs available</h1>
-                <p class="text-lg text-[#64748B]">Check back soon for new job opportunities</p>
+                <p class="text-sm md:text-lg text-[#64748B]">Check back soon for new job opportunities</p>
              </div>`;
       interviewCount.innerText = interviewJobs.length;
       AvailableJob.innerHTML = `${interviewJobs.length} of ${jobs.length}`;
@@ -413,10 +414,10 @@ function loadRejectedJobs(){
     
     
     if(rejectedJobs.length == 0){
-      cardContainer.innerHTML = `<div class="p-32 flex flex-col justify-center items-center bg-white rounded-lg shadow">
+       cardContainer.innerHTML = `<div class="p-4 md:p-32 flex flex-col text-center justify-center items-center bg-white rounded-lg shadow">
                 <img src="jobs.png" alt="">
                 <h1 class="text-2xl font-bold">No jobs available</h1>
-                <p class="text-lg text-[#64748B]">Check back soon for new job opportunities</p>
+                <p class="text-sm md:text-lg text-[#64748B]">Check back soon for new job opportunities</p>
              </div>`;
       rejectedCount.innerText = rejectedJobs.length;
       AvailableJob.innerHTML = `${rejectedJobs.length} of ${jobs.length}`;
@@ -450,6 +451,7 @@ function loadRejectedJobs(){
     }
 
 }
+
 
 
 
