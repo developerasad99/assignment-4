@@ -358,7 +358,7 @@ function removeDataForReject(idx){
 
 }
 
-
+// load interview job first time when click interview tap
 function loadInterview(){
     cardContainer.innerHTML="";
     interviewbtn.classList.add("btn-success")
