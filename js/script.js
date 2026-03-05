@@ -402,6 +402,8 @@ function loadInterview(){
     }
 
 }
+
+// load rejected jobs when click reject tab 
 function loadRejectedJobs(){
     cardContainer.innerHTML="";
     allbtn.classList.remove("btn-success")
