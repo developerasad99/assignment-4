@@ -321,6 +321,7 @@ function removeData(idx){
   loadAllData()
   interviewCount.innerText = interviewJobs.length;
   rejectedCount.innerText = rejectedJobs.length;
+  AvailableJob.innerText = jobs.length;
 
 }
 function removeDataForInterview(idx){
@@ -338,6 +339,7 @@ function removeDataForInterview(idx){
   interviewCount.innerText = interviewJobs.length;
   rejectedCount.innerText = rejectedJobs.length;
   TotalJob.innerText = jobs.length;
+  AvailableJob.innerHTML = `${interviewJobs.length} of ${jobs.length}`;
 
 }
 function removeDataForReject(idx){
@@ -354,7 +356,8 @@ function removeDataForReject(idx){
   loadRejectedJobs()
   interviewCount.innerText = interviewJobs.length;
   rejectedCount.innerText = rejectedJobs.length;
-   TotalJob.innerText = jobs.length;
+  TotalJob.innerText = jobs.length;
+  AvailableJob.innerHTML = `${rejectedJobs.length} of ${jobs.length}`;
 
 }
 
